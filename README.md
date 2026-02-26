@@ -1,156 +1,160 @@
-# Portfolio — Guide pour modifier le site
+# Portfolio — Modifier le site facilement
 
-**Important :** Les numéros de lignes indiqués sont des repères au moment où ce README a été écrit. Dès que tu ajoutes ou supprimes du code, les lignes bougent. Utilise la **recherche** (Ctrl+F ou Cmd+F) avec les mots indiqués pour retrouver le bon endroit.
-
----
-
-## 1. Changer la vidéo du film (hero, en haut de page)
-
-La vidéo qui joue en haut du site est une **vidéo YouTube**. Il faut modifier **2 endroits**.
-
-### A. Les textes affichés sous la vidéo
-
-**Fichier :** `index.html`  
-**Recherche :** `hero-label` ou `Film de fin d'études`
-
-Tu verras un bloc qui ressemble à ça :
-
-```html
-<p class="hero-label">Film de fin d'études 2025</p>
-<h1 class="hero-title">Papy dans le tiroir</h1>
-<p class="hero-desc">Réalisé par Axel Wehbeh et Ludmilla Cheklit — 5 min 19.</p>
-```
-
-- **hero-label** → le petit texte au-dessus du titre (ex. « Film de fin d'études 2025 »).
-- **hero-title** → le titre principal du film (ex. « Papy dans le tiroir »).
-- **hero-desc** → la ligne en dessous (ex. réalisateurs, durée).
-
-Modifie le contenu entre les balises `> ... <` comme tu veux.
-
-### B. L’ID de la vidéo YouTube
-
-**Fichier :** `script.js`  
-**Recherche :** `videoId` ou `91iY8YFuAxg`
-
-Tu verras une ligne du type :
-
-```js
-videoId: "91iY8YFuAxg",
-```
-
-Pour une autre vidéo YouTube :
-1. Ouvre la vidéo sur YouTube.
-2. Dans l’URL, repère la partie après `v=` :  
-   `https://www.youtube.com/watch?v=XXXXXXXX` → l’ID c’est **XXXXXXXX**.
-3. Remplace `91iY8YFuAxg` par cet ID entre les guillemets.
-
-Exemple : pour `https://www.youtube.com/watch?v=AbCdEf123`, tu mets `videoId: "AbCdEf123",`.
+Tout le contenu du site (textes, cartes, vidéos, liens) est défini dans **un seul fichier** : `data.json`.  
+Pour modifier le site, il suffit d’éditer ce fichier — plus besoin de toucher au HTML.
 
 ---
 
-## 2. Section « Modelisation — Texturing » (cartes avec Sketchfab, images, vidéos)
+## Fichier à modifier : `data.json`
 
-**Fichier :** `index.html`  
-**Recherche :** `Modelisation — Texturing` ou `grid grid-5`
-
-Cette section contient une liste de **cartes**. Chaque carte est un bloc entre `<li class="card card-image">` et `</li>`.
-
-### Supprimer une carte
-
-Supprime tout le bloc correspondant, de `<li class="card card-image">` jusqu’à `</li>` (inclus). Il ne doit rester aucun `<li>...</li>` orphelin.
-
-### Ajouter une carte
-
-Copie-colle un bloc entier d’une carte existante (un `<li>...</li>`), puis adapte le contenu.
-
-**Carte avec un modèle Sketchfab (3D) :**
-
-```html
-<li class="card card-image">
-  <div class="card-media card-media-embed">
-    <iframe title="Nom du modèle" frameborder="0" allowfullscreen mozallowfullscreen="true"
-      webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking"
-      src="https://sketchfab.com/models/XXXXXXXX/embed"></iframe>
-  </div>
-  <div class="card-info">
-    <span class="card-title">Nom affiché sous la carte</span>
-  </div>
-</li>
-```
-
-- Remplace **XXXXXXXX** par l’ID du modèle Sketchfab (tu le trouves dans l’URL d’embed sur Sketchfab).
-- Remplace **Nom du modèle** et **Nom affiché sous la carte** par le titre que tu veux.
-
-**Carte avec une image :**
-
-```html
-<li class="card card-image">
-  <div class="card-media card-media--full">
-    <img src="nom_de_ton_fichier.jpg" alt="Description courte" loading="lazy" />
-  </div>
-  <div class="card-info">
-    <span class="card-title">Titre sous l'image</span>
-  </div>
-</li>
-```
-
-- **src** : nom du fichier image (à mettre dans le même dossier que `index.html`, ou mettre le chemin, ex. `images/photo.jpg`).
-- **alt** et **card-title** : texte affiché / sous la carte.
-
-**Carte avec une vidéo YouTube :**
-
-```html
-<li class="card card-image">
-  <div class="card-media card-media-embed">
-    <iframe src="https://www.youtube.com/embed/ID_VIDEO_ICI?rel=0" title="Titre de la vidéo"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
-  </div>
-  <div class="card-info">
-    <span class="card-title">Titre sous la vidéo</span>
-  </div>
-</li>
-```
-
-- Remplace **ID_VIDEO_ICI** par l’ID YouTube (comme pour le film, la partie après `v=` dans l’URL).
-
-Tu peux ajouter autant de cartes que tu veux : colle les nouveaux blocs `<li>...</li>` **à l’intérieur** du `<ul class="grid grid-5">`, juste avant la balise `</ul>`.
+Ouvre `data.json` dans un éditeur de texte. C’est du **JSON** : respecte bien les virgules et les guillemets.  
+Après chaque modification, enregistre le fichier et rafraîchis la page dans le navigateur.
 
 ---
 
-## 3. Section « Texturing · Substance · Rendu Cycle »
+## 1. Titre du site et description
 
-**Fichier :** `index.html`  
-**Recherche :** `Texturing · Substance` ou `grid grid-2`
+En haut du fichier, dans `meta` :
 
-Même principe que la section Modelisation : les cartes sont des blocs `<li class="card card-image"> ... </li>` (ou avec une vidéo YouTube comme ci-dessus).
-
-- **Supprimer une carte** : supprime tout le bloc `<li>...</li>` correspondant.
-- **Ajouter une carte** : copie un bloc `<li>...</li>` existant dans cette section, colle-le avant `</ul>`, puis modifie le contenu (Sketchfab, image ou YouTube comme dans le paragraphe 2).
-
-Cette section utilise `grid grid-2` : les cartes s’affichent par 2 sur grand écran. Tu peux en mettre 1, 2, 3 ou plus.
+- **title** : le titre de l’onglet du navigateur.
+- **description** : la description pour le référencement.
 
 ---
 
-## 4. Instagram (section Dessins)
+## 2. En-tête (logo et menu)
 
-**Fichier :** `index.html`  
-**Recherche :** `instagram.com` ou `sugarlolotteart`
+Dans `header` :
 
-- Pour **changer de compte** : remplace `sugarlolotteart` par le nom d’utilisateur Instagram voulu dans :
-  - l’URL de l’iframe : `src="https://www.instagram.com/NOUVEAU_COMPTE/embed"`
-  - le lien en dessous : `href="https://www.instagram.com/NOUVEAU_COMPTE/"`
+- **logo** : le texte du logo en haut à gauche.
+- **nav** : la liste des liens du menu. Chaque entrée a :
+  - **label** : le texte affiché (ex. « Projet phare »).
+  - **href** : le lien (ex. `#film`, `#Modelisation`, `#substance`, `#instagram`).
+
+Pour ajouter ou supprimer un lien, ajoute ou supprime un bloc `{ "label": "…", "href": "…" }` dans le tableau `nav`.
 
 ---
 
-## 5. Rappel sur les numéros de lignes
+## 3. Hero (film en haut de page)
 
-Dès que tu ajoutes ou supprimes du HTML, les numéros de lignes dans le fichier changent. Ne te fie pas à « ligne 50 » ou « ligne 120 » après avoir modifié la page : utilise toujours la **recherche** (Ctrl+F / Cmd+F) avec les mots-clés donnés (ex. `hero-title`, `grid grid-5`, `card-title`, etc.) pour retrouver l’endroit à modifier.
+Dans `hero` :
+
+- **videoId** : l’ID de la vidéo YouTube.  
+  Pour le trouver : ouvre la vidéo sur YouTube → dans l’URL, la partie après `v=`  
+  Ex. `https://www.youtube.com/watch?v=91iY8YFuAxg` → l’ID est `91iY8YFuAxg`.
+- **ariaLabel** : texte pour l’accessibilité (ex. titre du film).
+- **label** : le petit texte au-dessus du titre (ex. « Film de fin d'études 2025 »).
+- **title** : le titre principal du film.
+- **desc** : la ligne en dessous (réalisateurs, durée, etc.).
+- **scrollHint** : le texte « Défiler » sous le hero.
+
+---
+
+## 4. Sections avec des cartes (Modélisation, Substance)
+
+Les sections **Modélisation — Texturing** et **Texturing · Substance · Rendu Cycle** sont dans `sections` :
+
+- **modelisation** : première section (grille 5 colonnes).
+- **substance** : deuxième section (grille 2 colonnes).
+
+Pour chaque section tu as :
+
+- **id** : identifiant pour les ancres (ne pas changer sauf si tu sais ce que tu fais).
+- **title** : titre de la section.
+- **intro** : texte d’introduction sous le titre.
+- **gridClass** : `grid-5` (5 colonnes) ou `grid-2` (2 colonnes). Ne pas changer sauf pour adapter la mise en page.
+- **cards** : la liste des cartes.
+
+### Types de cartes
+
+Chaque carte a un **type** et un **title** (titre affiché sous la carte).
+
+**Carte Sketchfab (modèle 3D)**  
+Exemple :
+
+```json
+{
+  "type": "sketchfab",
+  "sketchfabId": "87f79275ce46411f9182e4b21c0c596b",
+  "embedParams": "?transparent=1",
+  "title": "biblically accurate angel"
+}
+```
+
+- **sketchfabId** : l’ID du modèle (dans l’URL d’embed sur Sketchfab).
+- **embedParams** : optionnel (ex. `"?transparent=1"` ou `"?camera=0"`). Tu peux omettre la ligne si tu n’en as pas besoin.
+
+**Carte image**  
+Exemple :
+
+```json
+{
+  "type": "image",
+  "src": "ref_pirate.webp",
+  "alt": "Pirate",
+  "title": "Pirate"
+}
+```
+
+- **src** : nom du fichier image (à placer dans le même dossier que `index.html`, ou avec un chemin comme `images/photo.jpg`).
+- **alt** : texte de remplacement pour l’image.
+- **title** : titre sous la carte.
+
+**Carte vidéo YouTube**  
+Exemple :
+
+```json
+{
+  "type": "youtube",
+  "videoId": "Hk5unyklg0s",
+  "title": "Vidéo texturing"
+}
+```
+
+- **videoId** : l’ID YouTube (comme pour le hero, la partie après `v=` dans l’URL).
+
+### Ajouter / supprimer une carte
+
+- **Ajouter** : copie un bloc de carte existant dans le tableau **cards** de la section, colle-le avant la dernière `]`, puis modifie les champs (type, title, sketchfabId / src / videoId, etc.).
+- **Supprimer** : supprime tout le bloc `{ … }` de la carte, et la virgule qui précède (ou qui suit) pour garder un JSON valide.
+
+---
+
+## 5. Section Instagram (Dessins)
+
+Dans `instagram` :
+
+- **title** : titre de la section (ex. « Dessins »).
+- **intro** : texte d’introduction.
+- **username** : le nom d’utilisateur Instagram (ex. `sugarlolotteart`).  
+  Pour changer de compte, remplace uniquement cette valeur.
+- **linkText** : le texte du lien sous l’embed (ex. « Voir le profil sur Instagram »).
+
+---
+
+## 6. Pied de page
+
+Dans `footer` :
+
+- **name** : nom affiché dans le footer.
+- **tagline** : sous-titre (ex. « Portfolio 2D / 3D / JV »).
 
 ---
 
 ## Fichiers du projet
 
-- **index.html** — tout le contenu (textes, cartes, liens). C’est ici que tu fais la plupart des changements.
-- **script.js** — notamment l’ID de la vidéo du film (hero). À modifier seulement pour changer la vidéo du haut de page.
-- **styles.css** — apparence (couleurs, mise en page). Pas besoin d’y toucher pour ajouter/supprimer des cartes ou changer les textes.
+| Fichier      | Rôle |
+|-------------|------|
+| **data.json** | **Contenu éditable** : textes, cartes, liens, vidéos. C’est ici que tu fais les modifications. |
+| **index.html** | Structure de la page. En général, ne pas modifier. |
+| **script.js**   | Charge `data.json` et affiche le contenu. Ne pas modifier sauf pour une raison précise. |
+| **styles.css** | Apparence (couleurs, mise en page). Modifier seulement pour changer le design. |
+
+---
+
+## Erreurs fréquentes avec le JSON
+
+- Oublier une **virgule** entre deux blocs, ou en mettre une en trop après le dernier élément d’un tableau.
+- Oublier les **guillemets** autour des clés et des textes.
+- Mettre un **retour à la ligne** au milieu d’une chaîne de caractères (reste sur une seule ligne entre les guillemets).
+
+Si la page reste blanche ou affiche « Impossible de charger le contenu », ouvre la console du navigateur (F12 → Console) : le message d’erreur indique souvent à quelle ligne le JSON est invalide.

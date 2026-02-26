@@ -1,0 +1,89 @@
+{
+  "meta": {
+    "title": "Ludmila Cheklit — Portfolio 2D / 3D / JV",
+    "description": "Portfolio artistique — Texturing, Substance, Rendu, Film de fin d'année, Dessins."
+  },
+  "header": {
+    "logo": "Ludmila Cheklit",
+    "nav": [
+      { "label": "Projet phare", "href": "#film" },
+      { "label": "Modélisation", "href": "#Modelisation" },
+      { "label": "Substance", "href": "#substance" },
+      { "label": "Dessins", "href": "#instagram" }
+    ]
+  },
+  "hero": {
+    "videoId": "91iY8YFuAxg",
+    "ariaLabel": "Papy dans le tiroir — Film de fin d'études 2025",
+    "label": "Film de fin d'études 2025",
+    "title": "Papy dans le tiroir",
+    "desc": "Réalisé par Axel Wehbeh et Ludmilla Cheklit — 5 min 19.",
+    "scrollHint": "Défiler"
+  },
+  "sections": {
+    "modelisation": {
+      "id": "Modelisation",
+      "title": "Modélisation — Texturing",
+      "intro": "Cinq objets texturés.",
+      "gridClass": "grid-5",
+      "cards": [
+        {
+          "type": "sketchfab",
+          "sketchfabId": "87f79275ce46411f9182e4b21c0c596b",
+          "embedParams": "?transparent=1",
+          "title": "biblically accurate angel"
+        },
+        {
+          "type": "sketchfab",
+          "sketchfabId": "cdecc355242f4acf901256211f744040",
+          "title": "petite pirate"
+        },
+        {
+          "type": "image",
+          "src": "ref_pirate.webp",
+          "alt": "Pirate",
+          "title": "Pirate"
+        },
+        {
+          "type": "sketchfab",
+          "sketchfabId": "10fa2b494d7847bd9a07d64274556ce6",
+          "title": "Projet Figurine Hika March"
+        },
+        {
+          "type": "youtube",
+          "videoId": "Hk5unyklg0s",
+          "title": "Vidéo texturing"
+        }
+      ]
+    },
+    "substance": {
+      "id": "substance",
+      "title": "Texturing · Substance · Rendu Cycle",
+      "intro": "Réalisations en texturing et rendu.",
+      "gridClass": "grid-2",
+      "cards": [
+        {
+          "type": "sketchfab",
+          "sketchfabId": "1614955ea35545b88c42cb3d50a5bd4a",
+          "embedParams": "?camera=0",
+          "title": "Fiole nomad sculpt"
+        },
+        {
+          "type": "youtube",
+          "videoId": "R-wRxqPghFM",
+          "title": "Vidéo — Substance / Rendu Cycle"
+        }
+      ]
+    }
+  },
+  "instagram": {
+    "title": "Dessins",
+    "intro": "Mes créations sur Instagram.",
+    "username": "sugarlolotteart",
+    "linkText": "Voir le profil sur Instagram"
+  },
+  "footer": {
+    "name": "Ludmila Cheklit",
+    "tagline": "Portfolio 2D / 3D / JV"
+  }
+}

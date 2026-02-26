@@ -42,6 +42,12 @@ body {
   overflow-x: hidden;
 }
 
+.loading-message {
+  padding: 4rem var(--space);
+  text-align: center;
+  color: var(--text-muted);
+}
+
 /* Noise overlay */
 .noise {
   position: fixed;
