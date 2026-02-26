@@ -1,9 +1,14 @@
 {
+  "_comment_file": "Tout le contenu du site est ici. Modifie les valeurs, garde les clés et la structure (virgules, guillemets).",
+
   "meta": {
+    "_comment": "Titre de l'onglet du navigateur et description pour le SEO.",
     "title": "Ludmila Cheklit — Portfolio 2D / 3D / JV",
     "description": "Portfolio artistique — Texturing, Substance, Rendu, Film de fin d'année, Dessins."
   },
+
   "header": {
+    "_comment": "Logo en haut à gauche et liens du menu de navigation.",
     "logo": "Ludmila Cheklit",
     "nav": [
       { "label": "Projet phare", "href": "#film" },
@@ -12,7 +17,9 @@
       { "label": "Dessins", "href": "#instagram" }
     ]
   },
+
   "hero": {
+    "_comment": "Vidéo YouTube en haut de page. videoId = partie après v= dans l'URL YouTube.",
     "videoId": "91iY8YFuAxg",
     "ariaLabel": "Papy dans le tiroir — Film de fin d'études 2025",
     "label": "Film de fin d'études 2025",
@@ -20,7 +27,9 @@
     "desc": "Réalisé par Axel Wehbeh et Ludmilla Cheklit — 5 min 19.",
     "scrollHint": "Défiler"
   },
+
   "sections": {
+    "_comment_modelisation": "Grille de cartes (5 colonnes). Types de carte : sketchfab | image | youtube.",
     "modelisation": {
       "id": "Modelisation",
       "title": "Modélisation — Texturing",
@@ -28,6 +37,7 @@
       "gridClass": "grid-5",
       "cards": [
         {
+          "_comment": "Carte Sketchfab : sketchfabId = ID dans l'URL d'embed. embedParams optionnel (?transparent=1, ?camera=0).",
           "type": "sketchfab",
           "sketchfabId": "87f79275ce46411f9182e4b21c0c596b",
           "embedParams": "?transparent=1",
@@ -39,6 +49,7 @@
           "title": "petite pirate"
         },
         {
+          "_comment": "Carte image : src = fichier (même dossier ou chemin). alt = texte de remplacement.",
           "type": "image",
           "src": "ref_pirate.webp",
           "alt": "Pirate",
@@ -50,12 +61,15 @@
           "title": "Projet Figurine Hika March"
         },
         {
+          "_comment": "Carte YouTube : videoId = partie après v= dans l'URL de la vidéo.",
           "type": "youtube",
           "videoId": "Hk5unyklg0s",
           "title": "Vidéo texturing"
         }
       ]
     },
+
+    "_comment_substance": "Deuxième section, grille 2 colonnes. Mêmes types de cartes que modelisation.",
     "substance": {
       "id": "substance",
       "title": "Texturing · Substance · Rendu Cycle",
@@ -76,13 +90,17 @@
       ]
     }
   },
+
   "instagram": {
+    "_comment": "Section Dessins. username = compte Instagram (sans @).",
     "title": "Dessins",
     "intro": "Mes créations sur Instagram.",
     "username": "sugarlolotteart",
     "linkText": "Voir le profil sur Instagram"
   },
+
   "footer": {
+    "_comment": "Pied de page du site.",
     "name": "Ludmila Cheklit",
     "tagline": "Portfolio 2D / 3D / JV"
   }
