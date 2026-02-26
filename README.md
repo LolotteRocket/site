@@ -1,7 +1,5 @@
 # Portfolio — Guide pour modifier le site
 
-Ce guide explique comment modifier le site **sans s’y connaître beaucoup**. Tout se fait dans les fichiers du projet.
-
 **Important :** Les numéros de lignes indiqués sont des repères au moment où ce README a été écrit. Dès que tu ajoutes ou supprimes du code, les lignes bougent. Utilise la **recherche** (Ctrl+F ou Cmd+F) avec les mots indiqués pour retrouver le bon endroit.
 
 ---
