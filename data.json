@@ -9,7 +9,7 @@
 
   "header": {
     "_comment": "Logo en haut à gauche et liens du menu de navigation.",
-    "logo": "Ludmila Cheklit",
+    "logo": "Ludmilla Cheklit",
     "nav": [
       { "label": "Projet phare", "href": "#film" },
       { "label": "Modélisation", "href": "#Modelisation" },
