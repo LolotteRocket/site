@@ -71,12 +71,6 @@
           "type": "sketchfab",
           "sketchfabId": "10fa2b494d7847bd9a07d64274556ce6",
           "title": "Projet Figurine Hika March"
-        },
-        {
-          "_comment": "YouTube : videoId = après v= dans l'URL.",
-          "type": "youtube",
-          "videoId": "Hk5unyklg0s",
-          "title": "Vidéo texturing"
         }
       ]
     },
@@ -85,8 +79,14 @@
       "id": "substance",
       "title": "Texturing · Substance · Rendu Cycle",
       "intro": "Réalisations en texturing et rendu.",
-      "gridClass": "grid-2",
+      "gridClass": "grid-3",
       "cards": [
+        {
+          "_comment": "YouTube : videoId = après v= dans l'URL.",
+          "type": "youtube",
+          "videoId": "Hk5unyklg0s",
+          "title": "Rendu Cycle"
+        },
         {
           "type": "sketchfab",
           "sketchfabId": "1614955ea35545b88c42cb3d50a5bd4a",
@@ -96,7 +96,7 @@
         {
           "type": "youtube",
           "videoId": "R-wRxqPghFM",
-          "title": "Vidéo — Substance / Rendu Cycle"
+          "title": "Rigging Maya Autodesk"
         }
       ]
     },
