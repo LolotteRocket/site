@@ -99,6 +99,19 @@
     "linkText": "Voir le profil sur Instagram"
   },
 
+  "Mini jeu": {
+    "_comment": "section mini jeu"
+    "intro": "Mini jeu crée a l'aide de junio programmer path",
+    <iframe
+     src="https://lolotterocket.github.io/ClickyCrate/"
+     width="960"
+     height="600"
+     frameborder="0"
+     allowfullscreen
+    >
+    </iframe>
+  },
+
   "footer": {
     "_comment": "Pied de page du site.",
     "name": "Ludmila Cheklit",
