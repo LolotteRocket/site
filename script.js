@@ -168,9 +168,8 @@
           autoplay: 1,
           mute: 1,
           enablejsapi: 1,
-          modestbranding: 1
+          modestbranding: 1,
           controls: 1
-          
         },
         events: {
           onReady: function (event) {
