@@ -4,7 +4,7 @@
   const main = document.getElementById("main-content");
   const loadingEl = main?.querySelector(".loading-message");
 
-  function renderCard(card) {
+  function renderCard(card, sectionKey) {
     const li = document.createElement("li");
     li.className = "card card-image";
 
@@ -44,6 +44,80 @@
       iframe.setAttribute("allowfullscreen", "");
       iframe.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
       media.appendChild(iframe);
+    } else if (card.type === "embed") {
+      var isMinijeuEmbed = sectionKey === "minijeu";
+      if (isMinijeuEmbed) {
+        media.className = "card-media card-media-embed-cover";
+        media.setAttribute("role", "button");
+        media.tabIndex = 0;
+        media.setAttribute("data-embed-url", card.url);
+        media.setAttribute("data-embed-title", card.title || "");
+        if (card.width && card.height) {
+          media.setAttribute("data-embed-width", card.width);
+          media.setAttribute("data-embed-height", card.height);
+        }
+        if (card.cover && card.cover.src) {
+          var coverImg = document.createElement("img");
+          coverImg.src = card.cover.src;
+          coverImg.alt = card.cover.alt || card.title;
+          coverImg.loading = "lazy";
+          media.appendChild(coverImg);
+        } else {
+          var placeholder = document.createElement("div");
+          placeholder.className = "card-embed-placeholder";
+          placeholder.setAttribute("aria-hidden", "true");
+          media.appendChild(placeholder);
+        }
+        var playOverlay = document.createElement("div");
+        playOverlay.className = "card-embed-play";
+        playOverlay.setAttribute("aria-hidden", "true");
+        playOverlay.innerHTML = "<span>▶</span>";
+        media.appendChild(playOverlay);
+        if (card.link && card.link.href) {
+          li.setAttribute("data-embed-link-href", card.link.href);
+          li.setAttribute("data-embed-link-text", card.link.text || "Voir le lien");
+          info.classList.add("card-info-with-link");
+          var linkBtn = document.createElement("a");
+          linkBtn.href = card.link.href;
+          linkBtn.target = "_blank";
+          linkBtn.rel = "noopener noreferrer";
+          linkBtn.className = "card-embed-link";
+          linkBtn.textContent = card.link.text || "Voir le lien";
+          info.appendChild(linkBtn);
+        }
+      } else {
+        media.className = "card-media card-media-embed card-media-embed-iframe";
+        var iframe = document.createElement("iframe");
+        iframe.src = card.url;
+        iframe.title = card.title || "";
+        iframe.setAttribute("frameborder", "0");
+        iframe.setAttribute("allowfullscreen", "");
+        if (card.width && card.height) {
+          media.style.aspectRatio = card.width + " / " + card.height;
+        }
+        media.appendChild(iframe);
+      }
+    } else if (card.type === "link") {
+      media.className = "card-media card-media-link";
+      const a = document.createElement("a");
+      a.href = card.href;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      a.className = "card-link-wrap";
+      if (card.image && card.image.src) {
+        const img = document.createElement("img");
+        img.src = card.image.src;
+        img.alt = card.image.alt || card.title;
+        img.loading = "lazy";
+        a.appendChild(img);
+      } else {
+        const span = document.createElement("span");
+        span.className = "card-link-placeholder";
+        span.textContent = "→";
+        a.appendChild(span);
+      }
+      media.appendChild(a);
+      titleSpan.textContent = card.linkText || card.title;
     }
 
     li.appendChild(media);
@@ -71,7 +145,7 @@
     ul.className = "grid " + sectionData.gridClass;
 
     sectionData.cards.forEach(function (card) {
-      ul.appendChild(renderCard(card));
+      ul.appendChild(renderCard(card, sectionKey));
     });
 
     container.appendChild(title);
@@ -166,6 +240,9 @@
 
     main.appendChild(renderSection("Modelisation", data.sections.modelisation));
     main.appendChild(renderSection("substance", data.sections.substance));
+    if (data.sections.minijeu) {
+      main.appendChild(renderSection("minijeu", data.sections.minijeu));
+    }
 
     var ig = data.instagram;
     var igSection = document.createElement("section");
@@ -194,6 +271,8 @@
     }
 
     initHeroVideo(data.hero.videoId);
+
+    initEmbedModal();
 
     var header = document.querySelector(".site-header");
     var menuBtn = document.querySelector(".menu-btn");
@@ -252,6 +331,101 @@
       .replace(/"/g, "&quot;")
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;");
+  }
+
+  function initEmbedModal() {
+    var overlay = document.createElement("div");
+    overlay.className = "modal-overlay";
+    overlay.setAttribute("aria-hidden", "true");
+    overlay.innerHTML =
+      '<div class="modal-box" role="dialog" aria-modal="true" aria-label="Jeu en plein écran">' +
+      '<div class="modal-actions">' +
+      '<a class="modal-link" href="#" target="_blank" rel="noopener noreferrer" style="display: none;"></a>' +
+      '<button type="button" class="modal-close" aria-label="Fermer">×</button>' +
+      "</div>" +
+      '<div class="modal-iframe-wrap"></div>' +
+      "</div>";
+    document.body.appendChild(overlay);
+
+    var iframeWrap = overlay.querySelector(".modal-iframe-wrap");
+    var closeBtn = overlay.querySelector(".modal-close");
+    var modalLink = overlay.querySelector(".modal-link");
+
+    function closeModal() {
+      overlay.classList.remove("open");
+      overlay.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      modalLink.style.display = "none";
+      modalLink.removeAttribute("href");
+      var inner = iframeWrap.querySelector(".modal-iframe-inner");
+      if (inner) {
+        var iframe = inner.querySelector("iframe");
+        if (iframe) iframe.src = "";
+        iframeWrap.removeChild(inner);
+      }
+    }
+
+    function openModal(url, title, width, height, link) {
+      var inner = document.createElement("div");
+      inner.className = "modal-iframe-inner";
+      var iframe = document.createElement("iframe");
+      iframe.src = url;
+      iframe.title = title || "";
+      iframe.setAttribute("frameborder", "0");
+      iframe.setAttribute("allowfullscreen", "true");
+      inner.appendChild(iframe);
+      iframeWrap.appendChild(inner);
+      if (link && link.href) {
+        modalLink.href = link.href;
+        modalLink.textContent = link.text || "Voir le lien";
+        modalLink.style.display = "";
+      } else {
+        modalLink.style.display = "none";
+      }
+      overlay.classList.add("open");
+      overlay.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    overlay.addEventListener("click", function (e) {
+      if (e.target === overlay) closeModal();
+    });
+    closeBtn.addEventListener("click", closeModal);
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && overlay.classList.contains("open")) closeModal();
+    });
+
+    main.addEventListener("click", function (e) {
+      var media = e.target.closest(".card-media-embed-cover");
+      if (!media) return;
+      e.preventDefault();
+      var card = media.closest(".card");
+      var url = media.getAttribute("data-embed-url");
+      var title = media.getAttribute("data-embed-title");
+      var w = media.getAttribute("data-embed-width");
+      var h = media.getAttribute("data-embed-height");
+      var link = card && card.getAttribute("data-embed-link-href")
+        ? { href: card.getAttribute("data-embed-link-href"), text: card.getAttribute("data-embed-link-text") }
+        : null;
+      if (url) openModal(url, title, w ? parseInt(w, 10) : null, h ? parseInt(h, 10) : null, link);
+    });
+
+    main.addEventListener("keydown", function (e) {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      var media = e.target.closest(".card-media-embed-cover");
+      if (!media) return;
+      e.preventDefault();
+      var card = media.closest(".card");
+      var url = media.getAttribute("data-embed-url");
+      var title = media.getAttribute("data-embed-title");
+      var w = media.getAttribute("data-embed-width");
+      var h = media.getAttribute("data-embed-height");
+      var link = card && card.getAttribute("data-embed-link-href")
+        ? { href: card.getAttribute("data-embed-link-href"), text: card.getAttribute("data-embed-link-text") }
+        : null;
+      if (url) openModal(url, title, w ? parseInt(w, 10) : null, h ? parseInt(h, 10) : null, link);
+    });
   }
 
   fetch("data.json")

@@ -61,8 +61,94 @@ Pour chaque section tu as :
 - **id** : identifiant pour les ancres (ne pas changer sauf si tu sais ce que tu fais).
 - **title** : titre de la section.
 - **intro** : texte d’introduction sous le titre.
-- **gridClass** : `grid-5` (5 colonnes) ou `grid-2` (2 colonnes). Ne pas changer sauf pour adapter la mise en page.
-- **cards** : la liste des cartes.
+- **gridClass** : `grid-5` (5 colonnes), `grid-2` (2 colonnes) ou `grid-3` (3 colonnes, ex. section Mini jeu). Ne pas changer sauf pour adapter la mise en page.
+
+### Section Mini jeu (sections.minijeu)
+
+La section **Mini jeu** affiche jusqu’à **3 cartes par ligne** (`gridClass: "grid-3"`). Elle accepte les mêmes types que Modélisation/Substance, plus le type **embed** (jeu avec optionnel **lien** sur la carte).
+
+**Carte jeu embarqué (embed) — couverture, popup au clic, lien optionnel**
+
+Une seule carte par jeu : image de couverture, clic pour ouvrir le jeu en popup, et **si tu ajoutes un lien** (GitHub, itch.io…), un bouton apparaît sous le titre pour y aller. Sans lien, pas de bouton.
+
+Exemple minimal (sans lien) :
+
+```json
+{
+  "type": "embed",
+  "url": "https://example.github.io/MonJeu/",
+  "title": "Mon jeu",
+  "width": 960,
+  "height": 600,
+  "cover": {
+    "src": "mon-jeu-cover.jpg",
+    "alt": "Capture d’écran du jeu"
+  }
+}
+```
+
+Avec un **lien** (ex. code source, page itch.io) — ajoute l’objet **link** :
+
+```json
+{
+  "type": "embed",
+  "url": "https://example.github.io/MonJeu/",
+  "title": "Mon jeu",
+  "width": 960,
+  "height": 600,
+  "cover": { "src": "mon-jeu-cover.jpg", "alt": "Mon jeu" },
+  "link": {
+    "href": "https://github.com/user/MonJeu",
+    "text": "Voir le repo GitHub"
+  }
+}
+```
+
+- **url** : URL du jeu (GitHub Pages, itch.io embed, etc.).
+- **title** : titre sous la carte.
+- **width** / **height** : ratio dans la popup (optionnel).
+- **cover** : optionnel. **src** = image de couverture, **alt** = texte de remplacement. Sans **cover**, un placeholder avec icône « jouer » s’affiche.
+- **link** : optionnel. **href** = URL du lien, **text** = texte du bouton. Si **link** est absent, aucun bouton n’est affiché.
+
+Dans la section Mini jeu tu peux aussi utiliser **image**, **youtube** et **sketchfab** (même format que dans Modélisation). Le type **link** seul existe aussi (voir tutoriel plus bas) si tu veux une carte qui ne fait qu’afficher un lien, sans jeu.
+
+---
+
+### Tutoriels — Mini jeu et liens
+
+**Jeu avec lien GitHub**
+
+Tu héberges le jeu sur GitHub Pages et tu veux un bouton « Voir le code » sur la carte :
+
+1. Dans `sections.minijeu.cards`, ajoute une carte **embed** avec **url** = l’URL du jeu (ex. `https://ton-user.github.io/NomDuJeu/`).
+2. Ajoute **link** avec **href** = l’URL du dépôt GitHub (ex. `https://github.com/ton-user/NomDuJeu`) et **text** = `"Voir le repo GitHub"` (ou le libellé de ton choix).
+3. Optionnel : **cover** avec une capture d’écran du jeu.
+
+Le bouton s’affiche sous le titre ; au clic sur la couverture, le jeu s’ouvre en popup.
+
+**Jeu avec lien itch.io**
+
+Même principe : une carte **embed** avec **url** = l’URL de la page du jeu sur itch.io (ex. `https://ton-compte.itch.io/ton-jeu`). Si tu préfères que le clic ouvre itch.io au lieu d’un embed en popup, tu peux mettre **url** vers la page itch.io et **link** avec le même href et **text** = `"Jouer sur itch.io"`. (Tu peux aussi garder **url** pour un autre hébergeur du jeu et **link** pour itch.io.)
+
+**Carte lien seule (sans jeu)**
+
+Pour une carte qui ne fait qu’afficher un lien (pas de jeu en popup), tu peux utiliser le type **link** dans la section Mini jeu :
+
+```json
+{
+  "type": "link",
+  "href": "https://github.com/user/repo",
+  "title": "Titre de la carte",
+  "linkText": "Voir le projet"
+}
+```
+
+- **href** : URL du lien.
+- **title** : titre de la carte.
+- **linkText** : optionnel, texte sous la carte (sinon = title).
+- **image** : optionnel. `{ "src": "image.jpg", "alt": "..." }` pour une miniature.
+
+Cette forme n’est pas dans le `data.json` de base ; tu l’ajoutes si tu en as besoin.
 
 ### Types de cartes
 
@@ -140,7 +226,7 @@ Dans `footer` :
 
 ---
 
-## Fichiers du projet
+## 7. Fichiers du projet
 
 | Fichier      | Rôle |
 |-------------|------|
@@ -151,7 +237,7 @@ Dans `footer` :
 
 ---
 
-## Erreurs fréquentes avec le JSON
+## 8. Erreurs fréquentes avec le JSON
 
 - Oublier une **virgule** entre deux blocs, ou en mettre une en trop après le dernier élément d’un tableau.
 - Oublier les **guillemets** autour des clés et des textes.
