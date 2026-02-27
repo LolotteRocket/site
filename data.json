@@ -67,6 +67,12 @@
           "alt": "Pirate",
           "title": "Pirate"
         },
+          {
+          "_comment": "YouTube : videoId = après v= dans l'URL.",
+          "type": "youtube",
+          "videoId": "2FnkFSV60ko",
+          "title": "personnage du film ref 3d"
+        },
         {
           "type": "sketchfab",
           "sketchfabId": "10fa2b494d7847bd9a07d64274556ce6",
