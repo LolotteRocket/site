@@ -110,7 +110,7 @@
     "minijeu": {
       "id": "minijeu",
       "title": "Mini jeu",
-      "intro": "Mini jeu créé à l'aide de Junio Programmer Path.",
+      "intro": "Mini jeu créé à l'aide de Junior Programmer Path.",
       "gridClass": "grid-3",
       "cards": [
         {
@@ -127,8 +127,13 @@
           "link": {
             "href": "https://github.com/lolotterocket/ClickyCrate",
             "text": "Voir le repo GitHub"
-          }
-        }
+            }
+          },
+        {
+      "type": "pdf",
+      "url": "https://raw.githubusercontent.com/LolotteRocket/site/main/PDF.pdf",
+      "title": "Portfolio Illustration"
+    }
       ]
     }
   },
