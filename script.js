@@ -117,7 +117,17 @@
         a.appendChild(span);
       }
       media.appendChild(a);
-      titleSpan.textContent = card.linkText || card.title;
+      
+    titleSpan.textContent = card.linkText || card.title;
+    } else if (card.type === "pdf") {
+      media.className = "card-media card-media-embed";
+      const a = document.createElement("a");
+      a.href = card.url;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      a.className = "card-pdf-link";
+      a.textContent = "📄 Voir le PDF";
+      media.appendChild(a);
     }
 
     li.appendChild(media);
