@@ -109,7 +109,7 @@
     "_comment_minijeu": "Section Mini jeu. Grille 3 colonnes. Types : embed (optionnel link) | link | image | youtube | sketchfab.",
     "minijeu": {
       "id": "minijeu",
-      "title": "Mini jeu",
+      "title": "Mini jeu et Portfolio Illustration",
       "intro": "Mini jeu créé à l'aide de Junior Programmer Path.",
       "gridClass": "grid-3",
       "cards": [
@@ -131,7 +131,7 @@
           },
         {
       "type": "pdf",
-      "url": "https://raw.githubusercontent.com/LolotteRocket/site/main/PDF.pdf",
+      "url": "https://raw.githubusercontent.com/LolotteRocket/site/05a0564eb781e2212e85ed6b83642386f7a8f993/illustration.pdf",
       "title": "Portfolio Illustration"
     }
       ]
